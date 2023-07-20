@@ -14,6 +14,11 @@ export default function Home() {
           title="Edge function"
           description="Edge function which uses the google rest apis"
         />
+        <FetchCard
+          url="/isr"
+          title="ISR function"
+          description="Incremental Static Regeneration function which uses the google rest apis"
+        />
       </div>
     </>
   );
