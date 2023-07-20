@@ -10,6 +10,7 @@ export default function useFetch(url: string) {
   const reload = useCallback(
     async function loadData() {
       setTimeElapsed(undefined);
+      setError(undefined);
       setIsLoading(true);
       const start = performance.now();
       try {
