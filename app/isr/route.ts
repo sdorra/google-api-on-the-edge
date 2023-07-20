@@ -1,6 +1,5 @@
 import fetchCell from "@/lib/fetchCell";
 
-export const runtime = "edge";
 export const revalidate = false;
 export const fetchCache = "force-cache";
 
