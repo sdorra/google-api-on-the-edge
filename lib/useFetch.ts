@@ -14,7 +14,7 @@ export default function useFetch(url: string) {
       setIsLoading(true);
       const start = performance.now();
       try {
-        const res = await fetch(`${url}?cachebust=${start}`);
+        const res = await fetch(url);
         if (!res.ok) {
           throw new Error(`HTTP ${res.status} ${res.statusText}`);
         }
