@@ -1,6 +1,8 @@
 import { google } from "googleapis";
 import { env } from "@/lib/env.mjs";
 
+export const revalidate = 0;
+
 const sheets = google.sheets("v4");
 
 const jwtClient = new google.auth.JWT(

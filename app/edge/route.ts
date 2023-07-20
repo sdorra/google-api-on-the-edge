@@ -2,6 +2,7 @@ import { SignJWT, importPKCS8 } from "jose";
 import { env } from "@/lib/env.mjs";
 
 export const runtime = "edge";
+export const revalidate = 0;
 
 const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${env.SPREADSHEET_ID}/values/A2`;
 
