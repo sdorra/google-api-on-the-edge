@@ -1,13 +1,6 @@
 import React, { useCallback, useState } from "react";
+import { stringifyError } from "./utils";
 
-function stringifyError(err: unknown) {
-  if (typeof err === "string") {
-    return err;
-  } else if (err instanceof Error) {
-    return err.message;
-  }
-  return JSON.stringify(err);
-}
 
 export default function useFetch(url: string) {
   const [data, setData] = useState<string>();

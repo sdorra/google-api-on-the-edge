@@ -10,19 +10,13 @@ import {
   CardFooter,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { formatDuration } from "@/lib/utils";
 
 type Props = {
   url: string;
   title: string;
   description: string;
 };
-
-function formatDuration(ms: number) {
-  if (ms < 1000) {
-    return `${ms.toFixed(2)}ms`;
-  }
-  return `${(ms / 1000).toFixed(2)}s`;
-}
 
 export default function FetchCard({ url, title, description }: Props) {
   const { isLoading, error, timeElapsed, reload } = useFetch(url);

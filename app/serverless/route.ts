@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { env } from "@/lib/env.mjs";
+import { stringifyError } from "@/lib/utils";
 
 export const revalidate = 0;
 
@@ -13,19 +14,27 @@ const jwtClient = new google.auth.JWT(
 );
 
 export async function GET() {
-  await jwtClient.authorize();
+  try {
+    await jwtClient.authorize();
 
-  const data = await sheets.spreadsheets.values.get({
-    auth: jwtClient,
-    spreadsheetId: env.SPREADSHEET_ID,
-    range: "A1",
-  });
+    const data = await sheets.spreadsheets.values.get({
+      auth: jwtClient,
+      spreadsheetId: env.SPREADSHEET_ID,
+      range: "A1",
+    });
 
-  if (!data.data.values) {
-    throw new Error("sheet has no data");
+    if (!data.data.values) {
+      return new Response("Sheet has no data", {
+        status: 400,
+      });
+    }
+
+    return new Response(data.data.values[0][0], {
+      status: 200,
+    });
+  } catch (e) {
+    return new Response(stringifyError(e), {
+      status: 500,
+    });
   }
-
-  return new Response(data.data.values[0][0], {
-    status: 200,
-  });
 }
