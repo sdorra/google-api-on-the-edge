@@ -4,7 +4,7 @@ import { stringifyError } from "./utils";
 export default function useFetch(url: string) {
   const [data, setData] = useState<string>();
   const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [timeElapsed, setTimeElapsed] = useState<number>();
 
   const reload = useCallback(
