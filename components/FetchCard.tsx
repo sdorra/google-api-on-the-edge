@@ -43,7 +43,7 @@ export default function FetchCard({ url, title, description }: Props) {
       </CardContent>
       <CardFooter>
         <div className="text-right w-full">
-          <Button variant="outline" onClick={reload}>
+          <Button disabled={isLoading} variant="outline" onClick={reload}>
             Reload
           </Button>
         </div>
