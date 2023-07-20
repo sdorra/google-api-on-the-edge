@@ -11,15 +11,23 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { formatDuration } from "@/lib/utils";
+import invalidateISR from "@/lib/invalidateISR";
 
 type Props = {
   url: string;
   title: string;
   description: string;
+  invalidate?: boolean;
 };
 
-export default function FetchCard({ url, title, description }: Props) {
+export default function FetchCard({
+  url,
+  title,
+  description,
+  invalidate,
+}: Props) {
   const { isLoading, error, timeElapsed, reload } = useFetch(url);
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="h-32">
@@ -36,7 +44,14 @@ export default function FetchCard({ url, title, description }: Props) {
         )}
       </CardContent>
       <CardFooter>
-        <div className="text-right w-full">
+        <div className="text-right w-full space-x-2">
+          {invalidate && (
+            <form action={invalidateISR} className="inline-block">
+              <Button disabled={isLoading} variant="outline" type="submit">
+                Invalidate
+              </Button>
+            </form>
+          )}
           <Button disabled={isLoading} variant="outline" onClick={reload}>
             Reload
           </Button>

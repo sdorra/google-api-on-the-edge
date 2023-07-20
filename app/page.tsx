@@ -18,6 +18,7 @@ export default function Home() {
           url="/isr"
           title="ISR function"
           description="Incremental Static Regeneration function which uses the google rest apis"
+          invalidate
         />
       </div>
     </>
