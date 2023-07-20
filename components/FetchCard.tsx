@@ -28,7 +28,7 @@ export default function FetchCard({ url, title, description }: Props) {
       </CardHeader>
       <CardContent className="text-center flex-grow">
         {isLoading && <p className="text-4xl font-bold">Loading...</p>}
-        {error && <p>Error: {error}</p>}
+        {error && <p className="text-destructive font-bold">Error: {error}</p>}
         {timeElapsed && (
           <p className="text-display font-bold text-4xl text-primary">
             {formatDuration(timeElapsed)}
