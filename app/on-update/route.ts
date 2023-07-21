@@ -1,5 +1,5 @@
 import { env } from "@/lib/env.mjs";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     });
   }
 
+  revalidateTag("isr");
   revalidatePath("/isr");
 
   return new Response("OK", {

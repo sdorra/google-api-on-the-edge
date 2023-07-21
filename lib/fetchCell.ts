@@ -9,7 +9,7 @@ const payload = {
   iat: Math.floor(Date.now() / 1000),
 };
 
-export default async function fetchCell(cell: string) {
+export default async function fetchCell(cell: string, ...tags: string[]) {
   const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${env.SPREADSHEET_ID}/values/${cell}`;
 
   const privateKey = await importPKCS8(env.GOOGLE_SA_PRIVATE_KEY, "RS256");
@@ -35,6 +35,9 @@ export default async function fetchCell(cell: string) {
       method: "POST",
       body: JSON.stringify(form),
       headers: { "Content-Type": "application/json" },
+      next: {
+        tags,
+      },
     }
   );
 
@@ -43,6 +46,9 @@ export default async function fetchCell(cell: string) {
   // Use the access token to make the API request
   const apiResponse = await fetch(apiUrl, {
     headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    next: {
+      tags,
+    },
   });
   const data = await apiResponse.json();
 
