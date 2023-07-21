@@ -12,6 +12,7 @@ export default function useFetch(url: string) {
       setTimeElapsed(undefined);
       setError(undefined);
       setIsLoading(true);
+      setData(undefined);
       const start = performance.now();
       try {
         const res = await fetch(url);

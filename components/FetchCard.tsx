@@ -26,7 +26,7 @@ export default function FetchCard({
   description,
   invalidate,
 }: Props) {
-  const { isLoading, error, timeElapsed, reload } = useFetch(url);
+  const { isLoading, error, data, timeElapsed, reload } = useFetch(url);
 
   return (
     <Card className="flex flex-col">
@@ -41,6 +41,9 @@ export default function FetchCard({
           <p className="text-display font-bold text-4xl text-primary">
             {formatDuration(timeElapsed)}
           </p>
+        )}
+        {data && (
+          <p className="text-muted-foreground text-xs">{data}</p>
         )}
       </CardContent>
       <CardFooter>
